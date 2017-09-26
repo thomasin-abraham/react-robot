@@ -1,8 +1,10 @@
 import React from 'react'
 
+import styles from '../css/initial.css'
+
 const App = () => {
   return (
-    <div>
+    <div className={ styles.initial } >
       Initial
     </div>
   )
