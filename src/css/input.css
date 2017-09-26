@@ -31,4 +31,5 @@
   flex-direction: row;
   align-items: center;
   height: 3rem;
+  margin-bottom: 16px;
 }

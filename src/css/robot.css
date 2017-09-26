@@ -1,0 +1,12 @@
+.friend {
+  top: 0;
+  left: 0;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  transform: translate(0px, 0px);
+}

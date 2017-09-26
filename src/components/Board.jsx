@@ -29,4 +29,5 @@ function renderTiles(num, rowNum) {
   })
 }
 
+
 export default Board
