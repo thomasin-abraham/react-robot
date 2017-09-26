@@ -1,0 +1,23 @@
+{
+  "name": "little-robot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "test": "ava test/*.test.js"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^3.6.0"
+  },
+  "dependencies": {
+    "babel-preset-stage-0": "^6.24.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2"
+  }
+}
