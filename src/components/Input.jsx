@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from '../css/input.css'
 
-const App = () => {
+const Input = () => {
   return (
     <div className={ styles.wrapper }>
       <input className={ styles.input } type="text" />
@@ -11,4 +11,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Input

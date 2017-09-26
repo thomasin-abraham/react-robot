@@ -1,5 +1,15 @@
+:global(body) {
+  height: 100%;
+}
+:global(html) {
+  height: 100%;
+}
+:global(#app) {
+  height: 100%;
+}
+
 .container {
-  margin-top: 10%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
