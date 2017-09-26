@@ -1,11 +1,13 @@
 import React from 'react'
 
-import styles from '../css/initial.css'
+import styles from '../css/app.css'
+
+import Input from './Input'
 
 const App = () => {
   return (
-    <div className={ styles.initial } >
-      Initial
+    <div className={ styles.container } >
+      <Input />
     </div>
   )
 }
