@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
+    "dev": "webpack --watch",
     "test": "ava test/*.test.js"
   },
   "devDependencies": {
