@@ -4,7 +4,7 @@ const initialState = {
   radians: 0,
 }
 
-function position (state = initialState, action = {}) {
+export function position (state = initialState, action = {}) {
   switch (action.type) {
 
     case 'ROTATE':
@@ -14,15 +14,22 @@ function position (state = initialState, action = {}) {
       }
 
     case 'MOVE':
+      const x = keepOnBoard ( 5, state.x, action.steps * Math.sin(state.radians) )[0]
+      const y = keepOnBoard ( 5, state.y, action.steps * -Math.cos(state.radians) )[0]
       return {
         ...state,
-        x: Math.round( state.x + ( action.steps * Math.sin(state.radians) ) ),
-        y: Math.round( state.y + ( action.steps * -Math.cos(state.radians) ) )
+        x,
+        y
       }
 
     default:
       return initialState
   }
+}
+
+export function keepOnBoard (boardSize, currentSteps, newSteps) {
+  const total = Math.round( currentSteps + newSteps )
+  return total > (boardSize - 1) ? [ (boardSize - 1), false ] : total < 0 ? [ 0, false ] : [ total, true ]
 }
 
 export default position
