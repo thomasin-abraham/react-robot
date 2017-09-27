@@ -24440,58 +24440,29 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 exports.default = settings;
 
 var _utils = __webpack_require__(249);
+
+var _positions = __webpack_require__(250);
 
 function settings() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils.initialState;
   var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   switch (action.type) {
-
     case 'PLACE':
-      var xP = (0, _utils.keepOnBoard)(4, 0, action.x);
-      var yP = (0, _utils.keepOnBoard)(4, 0, action.y);
-      return {
-        active: true,
-        x: xP[0] || 0,
-        y: yP[0] || 0,
-        radians: action.radians,
-        message: xP[1] && yP[1] ? 'Placed on board!' : "That would put me off the table, got as close as I could"
-      };
-
+      return (0, _positions.placeRobot)(state, action);
     case 'ROTATE':
-      return _extends({}, state, {
-        radians: state.radians + action.radians,
-        message: 'Rotated to face ' + (0, _utils.radiansToDirection)(state.radians + action.radians)
-      });
-
+      return (0, _positions.rotateRobot)(state, action);
     case 'MOVE':
-      var x = (0, _utils.keepOnBoard)(4, state.x, action.steps * Math.sin(state.radians));
-      var y = (0, _utils.keepOnBoard)(4, state.y, action.steps * Math.cos(state.radians));
-      return _extends({}, state, {
-        x: x[0],
-        y: y[0],
-        message: x[1] && y[1] ? 'Vroom vrrom' : "That's too far, I'll fall off"
-      });
-
+      return (0, _positions.moveRobot)(state, action);
     case 'REPORT':
-      return _extends({}, state, {
-        message: ' ' + state.x + ', ' + state.y + ', ' + (0, _utils.radiansToDirection)(state.radians).toUpperCase() + ' '
-      });
-
+      return (0, _utils.setMessage)(' ' + state.x + ', ' + state.y + ', ' + radiansToDirection(state.radians).toUpperCase() + ' ');
     case 'SHUTDOWN':
       return _utils.initialState;
-
     case 'INVALID':
-      return _extends({}, state, {
-        message: "Couldn't understand command"
-      });
-
+      return (0, _utils.setMessage)("Couldn't understand command");
     default:
       return _utils.initialState;
   }
@@ -24963,8 +24934,12 @@ module.exports = {"links":"links__links___1wl_0"};
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.radiansToDirection = radiansToDirection;
 exports.keepOnBoard = keepOnBoard;
+exports.setMessage = setMessage;
 function radiansToDirection(rads) {
   var x = Math.round(Math.cos(rads));
   var y = Math.round(Math.sin(rads));
@@ -24976,6 +24951,12 @@ function keepOnBoard(boardSize, currentSteps, newSteps) {
   return total > boardSize ? [currentSteps, false] : total < 0 ? [currentSteps, false] : [total, true];
 }
 
+function setMessage(message) {
+  return _extends({}, state, {
+    message: message
+  });
+}
+
 var initialState = exports.initialState = {
   active: false,
   x: 0,
@@ -24983,6 +24964,54 @@ var initialState = exports.initialState = {
   radians: 0,
   message: 'Hello!'
 };
+
+/***/ }),
+/* 250 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.placeRobot = placeRobot;
+exports.rotateRobot = rotateRobot;
+exports.moveRobot = moveRobot;
+
+var _utils = __webpack_require__(249);
+
+function placeRobot(state, action) {
+  var xP = (0, _utils.keepOnBoard)(4, 0, action.x);
+  var yP = (0, _utils.keepOnBoard)(4, 0, action.y);
+  return {
+    active: true,
+    x: xP[0] || 0,
+    y: yP[0] || 0,
+    radians: action.radians,
+    message: xP[1] && yP[1] ? 'Placed on board!' : "That would put me off the table, got as close as I could"
+  };
+}
+
+function rotateRobot(state, action) {
+  return _extends({}, state, {
+    radians: state.radians + action.radians,
+    message: 'Rotated to face ' + (0, _utils.radiansToDirection)(state.radians + action.radians)
+  });
+}
+
+function moveRobot(state, action) {
+  var x = (0, _utils.keepOnBoard)(4, state.x, action.steps * Math.sin(state.radians));
+  var y = (0, _utils.keepOnBoard)(4, state.y, action.steps * Math.cos(state.radians));
+  return _extends({}, state, {
+    x: x[0],
+    y: y[0],
+    message: x[1] && y[1] ? 'Vroom vrrom' : "That's too far, I'll fall off"
+  });
+}
 
 /***/ })
 /******/ ]);
