@@ -1,7 +1,14 @@
 export const rotate = (direction) => {
   return {
     type: 'ROTATE',
-    degrees: direction == 'left' ? -(Math.PI/2) : (Math.PI/2)
+    radians: direction == 'left' ? -(Math.PI/2) : (Math.PI/2)
+  }
+}
+
+export const move = (steps) => {
+  return {
+    type: 'MOVE',
+    steps
   }
 }
 
@@ -12,5 +19,6 @@ export const command = (args) => {
 
 const actions = {
   left: () => rotate('left'),
-  right: () => rotate('right')
+  right: () => rotate('right'),
+  move: (steps) => move(parseInt(steps))
 }

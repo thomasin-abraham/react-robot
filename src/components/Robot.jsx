@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import styles from '../css/robot.css'
 
-const Robot = ({ degrees }) => {
+const Robot = ({ x, y, radians }) => {
   const position = {
-    transform: `rotate(${ degrees }rad)`
+    transform: `translate(${ x * 50 }px, ${ y * 50 }px) rotate(${ radians }rad)`
   }
   return (
     <div className={`jam jam-rocket ${ styles.friend }`}
@@ -16,7 +16,9 @@ const Robot = ({ degrees }) => {
 
 function mapStateToProps (state) {
   return {
-    degrees: state.position.degrees
+    x: state.position.x,
+    y: state.position.y,
+    radians: state.position.radians
   }
 }
 

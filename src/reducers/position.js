@@ -1,7 +1,7 @@
 const initialState = {
   x: 0,
   y: 0,
-  degrees: 0,
+  radians: 0,
 }
 
 function position (state = initialState, action = {}) {
@@ -10,7 +10,14 @@ function position (state = initialState, action = {}) {
     case 'ROTATE':
       return {
         ...state,
-        degrees: state.degrees + action.degrees
+        radians: state.radians + action.radians
+      }
+
+    case 'MOVE':
+      return {
+        ...state,
+        x: Math.round( state.x + ( action.steps * Math.sin(state.radians) ) ),
+        y: Math.round( state.y + ( action.steps * -Math.cos(state.radians) ) )
       }
 
     default:

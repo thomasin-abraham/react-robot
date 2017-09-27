@@ -1,11 +1,16 @@
 import test from 'ava'
 
-import { rotate } from '../src/actions/commands'
 import position from '../src/reducers/position'
 
-const emptyState = { x: 0, y: 0, degrees: 0 }
+const TEST_STATE = { x: 0, y: 0, radians: Math.PI }
 
-test('Rotate reducer and action works', t => {
-  const newState = position(emptyState, rotate('right'))
-  t.is( newState.degrees, Math.PI/2 )
+test('Rotate reducer  works', t => {
+  const newState = position(TEST_STATE, { type: 'ROTATE', radians: Math.PI/2 })
+  t.is( newState.radians, (3/2)*Math.PI )
+})
+
+test('Move reducer works', t => {
+  const newState = position(TEST_STATE, { type: 'MOVE', steps: 2 })
+  t.is( newState.y, 2 )
+  t.is ( newState.x, 0 )
 })
