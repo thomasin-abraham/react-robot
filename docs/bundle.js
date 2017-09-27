@@ -24458,7 +24458,7 @@ function settings() {
     case 'MOVE':
       return (0, _positions.moveRobot)(state, action);
     case 'REPORT':
-      return (0, _utils.setMessage)(state, ' ' + state.x + ', ' + state.y + ', ' + radiansToDirection(state.radians).toUpperCase() + ' ');
+      return (0, _utils.setMessage)(state, ' ' + state.x + ', ' + state.y + ', ' + (0, _utils.radiansToDirection)(state.radians).toUpperCase() + ' ');
     case 'SHUTDOWN':
       return _utils.initialState;
     case 'INVALID':

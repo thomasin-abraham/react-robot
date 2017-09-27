@@ -53,6 +53,7 @@ html {
   outline: none;
   border-radius: 0;
   box-shadow: none;
+  appearance: none;
 }
 
 .input__wrapper___3bWq9 {

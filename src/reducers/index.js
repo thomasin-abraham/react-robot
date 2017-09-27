@@ -1,4 +1,4 @@
-import { initialState, setMessage } from './utils'
+import { initialState, setMessage, radiansToDirection } from './utils'
 import { placeRobot, moveRobot, rotateRobot } from './positions'
 
 export default function settings (state = initialState, action = {}) {
