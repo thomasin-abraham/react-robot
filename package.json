@@ -6,27 +6,31 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack --watch",
-    "test": "ava test/*.test.js"
+    "test": "ava -v test/*.test.js"
+  },
+  "ava": {
+    "require": "babel-register",
+    "babel": "inherit"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.4",
     "ava": "^0.22.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.0",
+    "postcss-loader": "^2.0.6",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "style-loader": "^0.18.2",
     "webpack": "^3.6.0"
   },
   "dependencies": {
-    "autoprefixer": "^7.1.4",
-    "babel-preset-stage-0": "^6.24.1",
-    "postcss-loader": "^2.0.6",
     "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "webpack-combine-loaders": "^2.0.3"
+    "react-dom": "^15.6.2"
   }
 }
