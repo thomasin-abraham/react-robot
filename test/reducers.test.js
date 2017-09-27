@@ -15,9 +15,24 @@ test('Move reducer works', t => {
   t.is ( newState.x, 0 )
 })
 
+test('Place reducer works', t => {
+  const newState = position(TEST_STATE, { type: 'PLACE', x: 1, y: 1, radians: Math.PI })
+  t.is( newState.active, true )
+  t.is( newState.x, 1 )
+  t.is ( newState.y, 1 )
+  t.is ( newState.radians, Math.PI )
+})
+
+test('Place reducer works when x or y is illegible', t => {
+  const newState = position(TEST_STATE, { type: 'PLACE', x: 'weeeee', y: 1, radians: Math.PI })
+  t.is( newState.x, 0 )
+  t.is ( newState.y, 1 )
+  t.is ( newState.radians, Math.PI )
+})
+
 test('keepOnBoard returns correct values if robot over steps', t => {
   const actual = keepOnBoard(5, 3, 4)
-  t.is(actual[0], 4)
+  t.is(actual[0], 5)
   t.is(actual[1], false)
 })
 

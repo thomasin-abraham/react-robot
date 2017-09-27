@@ -1,19 +1,22 @@
 const initialState = {
+  active: false,
   x: 0,
   y: 0,
   radians: 0,
   message: 'Try typing in left to rotate'
 }
 
-const invalidState = (state) => {
-  return {
-    ...state,
-    message: "Couldn't understand command"
-  }
-}
-
 export function position (state = initialState, action = {}) {
   switch (action.type) {
+
+    case 'PLACE':
+      return {
+        active: true,
+        x: keepOnBoard ( 4, 0, action.x )[0] || 0,
+        y: keepOnBoard ( 4, 0, action.y )[0] || 0,
+        radians: action.radians,
+        message: 'Robot placed on board!'
+      }
 
     case 'ROTATE':
       return {
@@ -23,8 +26,8 @@ export function position (state = initialState, action = {}) {
       }
 
     case 'MOVE':
-      const x = keepOnBoard ( 5, state.x, action.steps * Math.sin(state.radians) )
-      const y = keepOnBoard ( 5, state.y, action.steps * -Math.cos(state.radians) )
+      const x = keepOnBoard ( 4, state.x, action.steps * Math.sin(state.radians) )
+      const y = keepOnBoard ( 4, state.y, action.steps * -Math.cos(state.radians) )
       return {
         ...state,
         x: x[0],
@@ -33,7 +36,10 @@ export function position (state = initialState, action = {}) {
       }
 
     case 'INVALID':
-      return invalidState(state)
+      return {
+          ...state,
+          message: "Couldn't understand command"
+      }
 
     default:
       return initialState
@@ -42,7 +48,7 @@ export function position (state = initialState, action = {}) {
 
 export function keepOnBoard (boardSize, currentSteps, newSteps) {
   const total = Math.round( currentSteps + newSteps )
-  return total > (boardSize - 1) ? [ (boardSize - 1), false ] : total < 0 ? [ 0, false ] : [ total, true ]
+  return total > boardSize ? [ boardSize, false ] : total < 0 ? [ 0, false ] : [ total, true ]
 }
 
 export default position

@@ -3,16 +3,17 @@ import { connect } from 'react-redux'
 
 import styles from '../css/message.css'
 
-const Message = ({ message }) => {
+const Message = ({ active, message }) => {
   return (
     <div className={ styles.message } >
-      { message }
+      { active ? message : "Try using the place command" }
     </div>
   )
 }
 
 function mapStateToProps (state) {
   return {
+    active: state.active,
     message: state.message
   }
 }
