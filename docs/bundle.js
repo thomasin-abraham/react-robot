@@ -24458,11 +24458,11 @@ function settings() {
     case 'MOVE':
       return (0, _positions.moveRobot)(state, action);
     case 'REPORT':
-      return (0, _utils.setMessage)(' ' + state.x + ', ' + state.y + ', ' + radiansToDirection(state.radians).toUpperCase() + ' ');
+      return (0, _utils.setMessage)(state, ' ' + state.x + ', ' + state.y + ', ' + radiansToDirection(state.radians).toUpperCase() + ' ');
     case 'SHUTDOWN':
       return _utils.initialState;
     case 'INVALID':
-      return (0, _utils.setMessage)("Couldn't understand command");
+      return (0, _utils.setMessage)(state, "Couldn't understand command");
     default:
       return _utils.initialState;
   }
@@ -24785,6 +24785,7 @@ var Robot = function Robot(_ref) {
     transform: 'translate(' + x * 50 + 'px, ' + (4 - y) * 50 + 'px) rotate(' + radians + 'rad)',
     display: active ? 'flex' : 'none'
   };
+
   return _react2.default.createElement('div', { className: 'jam jam-rocket ' + _robot2.default.friend,
     style: style });
 };
@@ -24952,7 +24953,7 @@ function keepOnBoard(boardSize, currentSteps, newSteps) {
   return total > boardSize ? [currentSteps, false] : total < 0 ? [currentSteps, false] : [total, true];
 }
 
-function setMessage(message) {
+function setMessage(state, message) {
   return _extends({}, state, {
     message: message
   });
@@ -24988,13 +24989,14 @@ var _utils = __webpack_require__(249);
 function placeRobot(state, action) {
   var xP = (0, _utils.keepOnBoard)(4, 0, action.x);
   var yP = (0, _utils.keepOnBoard)(4, 0, action.y);
-  return {
+  var isValid = xP[1] && yP[1];
+  return isValid ? {
     active: true,
     x: xP[0] || 0,
     y: yP[0] || 0,
     radians: action.radians,
-    message: xP[1] && yP[1] ? 'Placed on board!' : "That would put me off the table, got as close as I could"
-  };
+    message: 'Placed on board!'
+  } : (0, _utils.setMessage)(state, "That's not on the board! Try different co ordinates");
 }
 
 function rotateRobot(state, action) {

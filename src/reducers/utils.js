@@ -17,7 +17,7 @@ export function keepOnBoard (boardSize, currentSteps, newSteps) {
   return total > boardSize ? [ currentSteps, false ] : total < 0 ? [ currentSteps, false ] : [ total, true ]
 }
 
-export function setMessage (message) {
+export function setMessage (state, message) {
   return {
     ...state,
     message

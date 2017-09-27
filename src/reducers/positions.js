@@ -1,15 +1,18 @@
-import { keepOnBoard, radiansToDirection } from './utils'
+import { keepOnBoard, radiansToDirection, setMessage } from './utils'
 
 export function placeRobot (state, action) {
   const xP = keepOnBoard ( 4, 0, action.x )
   const yP = keepOnBoard ( 4, 0, action.y )
-  return {
-    active: true,
-    x: xP[0] || 0,
-    y: yP[0] || 0,
-    radians: action.radians,
-    message: xP[1] && yP[1] ? 'Placed on board!' : "That would put me off the table, got as close as I could"
-  }
+  const isValid = xP[1] && yP[1]
+  return isValid
+    ? {
+        active: true,
+        x: xP[0] || 0,
+        y: yP[0] || 0,
+        radians: action.radians,
+        message: 'Placed on board!'
+      }
+    : setMessage(state, "That's not on the board! Try different co ordinates")
 }
 
 export function rotateRobot (state, action) {

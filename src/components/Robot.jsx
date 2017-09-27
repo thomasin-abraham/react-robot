@@ -8,6 +8,7 @@ const Robot = ({ active, x, y, radians }) => {
     transform: `translate(${ x * 50 }px, ${ ( 4 - y ) * 50 }px) rotate(${ radians }rad)`,
     display: active ? 'flex' : 'none'
   }
+  
   return (
     <div className={`jam jam-rocket ${ styles.friend }`}
       style={ style }>
