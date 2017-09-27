@@ -1,4 +1,27 @@
+export const command = (args) => {
+  const argArray = args.split(' ')
+  return (actions[argArray[0]] || actions['invalid'])(argArray.slice(1))
+}
+
+const actions = {
+  place: (places) => place(places.join('')),
+  left: () => rotate('left'),
+  right: () => rotate('right'),
+  move: (steps) => move(parseInt(steps)),
+  report: () => { return { type: 'REPORT' } },
+  shutdown: () => { return { type: 'SHUTDOWN' } },
+  invalid: () => { return { type: 'INVALID'} }
+}
+
 export const place = (values) => {
+
+  const radianLookup = {
+    north: 0,
+    east: Math.PI/2,
+    south: Math.PI,
+    west: (3/2)*Math.PI
+  }
+
   const seperate = values.split(',')
   return {
     type: 'PLACE',
@@ -6,13 +29,6 @@ export const place = (values) => {
     y: parseInt(seperate[1]) || 0,
     radians: radianLookup[seperate[2]] || 0
   }
-}
-
-const radianLookup = {
-  north: 0,
-  east: Math.PI/2,
-  south: Math.PI,
-  west: (3/2)*Math.PI
 }
 
 export const rotate = (direction) => {
@@ -27,20 +43,4 @@ export const move = (steps) => {
     type: 'MOVE',
     steps: ( !isNaN(steps) ) ? steps : 1
   }
-}
-
-
-export const command = (args) => {
-  const argArray = args.split(' ')
-  return (actions[argArray[0]] || actions['invalid'])(argArray.slice(1))
-}
-
-const actions = {
-  place: (places) => place(places.join('')),
-  left: () => rotate('left'),
-  right: () => rotate('right'),
-  move: (steps) => move(parseInt(steps)),
-  report: () => { return { type: 'REPORT' } },
-  shutdown: () => { return { type: 'SHUTDOWN' } },
-  invalid: () => { return { type: 'INVALID'} }
 }

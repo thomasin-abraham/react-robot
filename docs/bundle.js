@@ -24628,39 +24628,6 @@ exports.default = (0, _reactRedux.connect)()(Input);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var _place = function _place(values) {
-  var seperate = values.split(',');
-  return {
-    type: 'PLACE',
-    x: parseInt(seperate[0]) || 0,
-    y: parseInt(seperate[1]) || 0,
-    radians: radianLookup[seperate[2]] || 0
-  };
-};
-
-exports.place = _place;
-var radianLookup = {
-  north: 0,
-  east: Math.PI / 2,
-  south: Math.PI,
-  west: 3 / 2 * Math.PI
-};
-
-var rotate = exports.rotate = function rotate(direction) {
-  return {
-    type: 'ROTATE',
-    radians: direction == 'left' ? -(Math.PI / 2) : Math.PI / 2
-  };
-};
-
-var _move = function _move(steps) {
-  return {
-    type: 'MOVE',
-    steps: !isNaN(steps) ? steps : 1
-  };
-};
-
-exports.move = _move;
 var command = exports.command = function command(args) {
   var argArray = args.split(' ');
   return (actions[argArray[0]] || actions['invalid'])(argArray.slice(1));
@@ -24689,6 +24656,40 @@ var actions = {
     return { type: 'INVALID' };
   }
 };
+
+var _place = function _place(values) {
+
+  var radianLookup = {
+    north: 0,
+    east: Math.PI / 2,
+    south: Math.PI,
+    west: 3 / 2 * Math.PI
+  };
+
+  var seperate = values.split(',');
+  return {
+    type: 'PLACE',
+    x: parseInt(seperate[0]) || 0,
+    y: parseInt(seperate[1]) || 0,
+    radians: radianLookup[seperate[2]] || 0
+  };
+};
+
+exports.place = _place;
+var rotate = exports.rotate = function rotate(direction) {
+  return {
+    type: 'ROTATE',
+    radians: direction == 'left' ? -(Math.PI / 2) : Math.PI / 2
+  };
+};
+
+var _move = function _move(steps) {
+  return {
+    type: 'MOVE',
+    steps: !isNaN(steps) ? steps : 1
+  };
+};
+exports.move = _move;
 
 /***/ }),
 /* 231 */
