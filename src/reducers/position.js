@@ -5,6 +5,13 @@ const initialState = {
   message: 'Try typing in left to rotate'
 }
 
+const invalidState = (state) => {
+  return {
+    ...state,
+    message: "Couldn't understand command"
+  }
+}
+
 export function position (state = initialState, action = {}) {
   switch (action.type) {
 
@@ -24,6 +31,9 @@ export function position (state = initialState, action = {}) {
         y: y[0],
         message: x[1] && y[1] ? 'Vroom vrrom' : 'Stopped myself from falling off, be more careful next time'
       }
+
+    case 'INVALID':
+      return invalidState(state)
 
     default:
       return initialState

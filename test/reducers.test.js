@@ -17,12 +17,12 @@ test('Move reducer works', t => {
 
 test('keepOnBoard returns correct values if robot over steps', t => {
   const actual = keepOnBoard(5, 3, 4)
-  t.is(actual[0], 5)
+  t.is(actual[0], 4)
   t.is(actual[1], false)
 })
 
 test('keepOnBoard returns correct values if robot stays on table', t => {
-  const actual = keepOnBoard(5, 3, 1)
-  t.is(actual[0], 4)
+  const actual = keepOnBoard(5, 2, 1)
+  t.is(actual[0], 3)
   t.is(actual[1], true)
 })

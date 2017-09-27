@@ -6,19 +6,28 @@ export const rotate = (direction) => {
 }
 
 export const move = (steps) => {
-  return {
+  return ( !isNaN(steps) )
+  ? {
     type: 'MOVE',
     steps
+  }
+  : invalid()
+}
+
+export const invalid = () => {
+  return {
+    type: 'INVALID'
   }
 }
 
 export const command = (args) => {
   const argArray = args.split(' ')
-  return (actions[argArray[0]])(argArray.slice(1))
+  return (actions[argArray[0]] || actions['invalid'])(argArray.slice(1))
 }
 
 const actions = {
   left: () => rotate('left'),
   right: () => rotate('right'),
-  move: (steps) => move(parseInt(steps))
+  move: (steps) => move(parseInt(steps)),
+  invalid: () => invalid()
 }
