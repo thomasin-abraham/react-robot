@@ -8,6 +8,11 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  outline: none;
+}
+
+.button:hover {
+  color: hotpink;
 }
 
 .button:before {

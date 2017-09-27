@@ -23,19 +23,12 @@ export const rotate = (direction) => {
 }
 
 export const move = (steps) => {
-  return ( !isNaN(steps) )
-  ? {
+  return {
     type: 'MOVE',
-    steps
+    steps: ( !isNaN(steps) ) ? steps : 1
   }
-  : invalid()
 }
 
-export const invalid = () => {
-  return {
-    type: 'INVALID'
-  }
-}
 
 export const command = (args) => {
   const argArray = args.split(' ')
@@ -47,5 +40,7 @@ const actions = {
   left: () => rotate('left'),
   right: () => rotate('right'),
   move: (steps) => move(parseInt(steps)),
-  invalid: () => invalid()
+  report: () => { return { type: 'REPORT' } },
+  shutdown: () => { return { type: 'SHUTDOWN' } },
+  invalid: () => { return { type: 'INVALID'} }
 }

@@ -12,9 +12,9 @@ test('Command function assigns move to correct function', t => {
   t.is(actual, 3)
 })
 
-test('Move action returns invalid if steps not number', t => {
-  const actual = command('move weee').type
-  t.is(actual, 'INVALID')
+test('Move action returns 1 if steps not number', t => {
+  const actual = command('move weee').steps
+  t.is(actual, 1)
 })
 
 test('Place action returns default if radians command not direction', t => {

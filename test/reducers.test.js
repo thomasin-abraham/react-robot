@@ -1,6 +1,6 @@
 import test from 'ava'
 
-import { position, keepOnBoard } from '../src/reducers/position'
+import { position, keepOnBoard, radiansToDirection } from '../src/reducers/position'
 
 const TEST_STATE = { x: 0, y: 0, radians: Math.PI }
 
@@ -10,9 +10,9 @@ test('Rotate reducer  works', t => {
 })
 
 test('Move reducer works', t => {
-  const newState = position(TEST_STATE, { type: 'MOVE', steps: 2 })
+  const newState = position(TEST_STATE, { type: 'MOVE', steps: -2 })
   t.is( newState.y, 2 )
-  t.is ( newState.x, 0 )
+  t.is ( newState.x, -0 )
 })
 
 test('Place reducer works', t => {
@@ -30,9 +30,14 @@ test('Place reducer works when x or y is illegible', t => {
   t.is ( newState.radians, Math.PI )
 })
 
+test('Radians to direction returns correct direction', t => {
+  const actual = radiansToDirection(Math.PI)
+  t.is(actual, 'south')
+})
+
 test('keepOnBoard returns correct values if robot over steps', t => {
   const actual = keepOnBoard(5, 3, 4)
-  t.is(actual[0], 5)
+  t.is(actual[0], 3)
   t.is(actual[1], false)
 })
 
