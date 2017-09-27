@@ -1,6 +1,7 @@
 import test from 'ava'
 
-import { position, keepOnBoard, radiansToDirection } from '../src/reducers/position'
+import position from '../src/reducers'
+import { keepOnBoard, radiansToDirection } from '../src/reducers/utils'
 
 const TEST_STATE = { x: 0, y: 0, radians: Math.PI }
 

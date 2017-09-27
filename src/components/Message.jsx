@@ -6,7 +6,7 @@ import styles from '../css/message.css'
 const Message = ({ active, message }) => {
   return (
     <div className={ styles.message } >
-      { active ? message : "Try using the place command" }
+      { active ? message : "Try typing in 'place' to initialise" }
     </div>
   )
 }

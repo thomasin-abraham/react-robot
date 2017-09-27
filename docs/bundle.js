@@ -24441,49 +24441,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _redux = __webpack_require__(53);
-
-var _position = __webpack_require__(226);
-
-var _position2 = _interopRequireDefault(_position);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _position2.default;
-
-/***/ }),
-/* 226 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-exports.position = position;
-exports.radiansToDirection = radiansToDirection;
-exports.keepOnBoard = keepOnBoard;
-var initialState = {
-  active: false,
-  x: 0,
-  y: 0,
-  radians: 0,
-  message: 'Hello!'
-};
+exports.default = settings;
 
-function position() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+var _utils = __webpack_require__(249);
+
+function settings() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _utils.initialState;
   var action = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   switch (action.type) {
 
     case 'PLACE':
-      var xP = keepOnBoard(4, 0, action.x);
-      var yP = keepOnBoard(4, 0, action.y);
+      var xP = (0, _utils.keepOnBoard)(4, 0, action.x);
+      var yP = (0, _utils.keepOnBoard)(4, 0, action.y);
       return {
         active: true,
         x: xP[0] || 0,
@@ -24495,12 +24467,12 @@ function position() {
     case 'ROTATE':
       return _extends({}, state, {
         radians: state.radians + action.radians,
-        message: 'Rotated to face ' + radiansToDirection(state.radians + action.radians)
+        message: 'Rotated to face ' + (0, _utils.radiansToDirection)(state.radians + action.radians)
       });
 
     case 'MOVE':
-      var x = keepOnBoard(4, state.x, action.steps * Math.sin(state.radians));
-      var y = keepOnBoard(4, state.y, action.steps * Math.cos(state.radians));
+      var x = (0, _utils.keepOnBoard)(4, state.x, action.steps * Math.sin(state.radians));
+      var y = (0, _utils.keepOnBoard)(4, state.y, action.steps * Math.cos(state.radians));
       return _extends({}, state, {
         x: x[0],
         y: y[0],
@@ -24509,11 +24481,11 @@ function position() {
 
     case 'REPORT':
       return _extends({}, state, {
-        message: ' ' + state.x + ', ' + state.y + ', ' + radiansToDirection(state.radians).toUpperCase() + ' '
+        message: ' ' + state.x + ', ' + state.y + ', ' + (0, _utils.radiansToDirection)(state.radians).toUpperCase() + ' '
       });
 
     case 'SHUTDOWN':
-      return initialState;
+      return _utils.initialState;
 
     case 'INVALID':
       return _extends({}, state, {
@@ -24521,24 +24493,12 @@ function position() {
       });
 
     default:
-      return initialState;
+      return _utils.initialState;
   }
 }
 
-function radiansToDirection(rads) {
-  var x = Math.round(Math.cos(rads));
-  var y = Math.round(Math.sin(rads));
-  return x == '0' ? y == '-1' ? 'west' : 'east' : x == '-1' ? 'south' : 'north';
-}
-
-function keepOnBoard(boardSize, currentSteps, newSteps) {
-  var total = Math.round(currentSteps + newSteps);
-  return total > boardSize ? [currentSteps, false] : total < 0 ? [currentSteps, false] : [total, true];
-}
-
-exports.default = position;
-
 /***/ }),
+/* 226 */,
 /* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24905,7 +24865,7 @@ var Message = function Message(_ref) {
   return _react2.default.createElement(
     'div',
     { className: _message2.default.message },
-    active ? message : "Try using the place command"
+    active ? message : "Try typing in 'place' to initialise"
   );
 };
 
@@ -24983,6 +24943,46 @@ exports.default = Links;
 
 // removed by extract-text-webpack-plugin
 module.exports = {"links":"links__links___1wl_0"};
+
+/***/ }),
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.radiansToDirection = radiansToDirection;
+exports.keepOnBoard = keepOnBoard;
+function radiansToDirection(rads) {
+  var x = Math.round(Math.cos(rads));
+  var y = Math.round(Math.sin(rads));
+  return x == '0' ? y == '-1' ? 'west' : 'east' : x == '-1' ? 'south' : 'north';
+}
+
+function keepOnBoard(boardSize, currentSteps, newSteps) {
+  var total = Math.round(currentSteps + newSteps);
+  return total > boardSize ? [currentSteps, false] : total < 0 ? [currentSteps, false] : [total, true];
+}
+
+var initialState = exports.initialState = {
+  active: false,
+  x: 0,
+  y: 0,
+  radians: 0,
+  message: 'Hello!'
+};
 
 /***/ })
 /******/ ]);
