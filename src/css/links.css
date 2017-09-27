@@ -1,13 +1,21 @@
 .links {
   position: absolute;
-  padding: 16px;
+  padding: 0 16px;
   top: 0;
   left: 0;
   font-family: 'Roboto';
   font-size: 0.8rem;
+  margin-top: 0;
 }
 
 .links a {
   color: blue;
   text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .links {
+    margin-top: 32px;
+    position: static;
+  }
 }

@@ -24583,7 +24583,6 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     { className: _app2.default.container },
-    _react2.default.createElement(_Links2.default, null),
     _react2.default.createElement(_Input2.default, null),
     _react2.default.createElement(_Message2.default, null),
     _react2.default.createElement(
@@ -24591,7 +24590,8 @@ var App = function App() {
       { className: _app2.default.boardContainer },
       _react2.default.createElement(_Board2.default, null),
       _react2.default.createElement(_Robot2.default, null)
-    )
+    ),
+    _react2.default.createElement(_Links2.default, null)
   );
 };
 
@@ -24953,6 +24953,13 @@ var Links = function Links() {
     _react2.default.createElement(
       'p',
       null,
+      'Commands you can use:',
+      _react2.default.createElement('br', null),
+      'left, right, move, place, report, shutdown'
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
       _react2.default.createElement(
         'a',
         { href: 'https://github.com/thomasin-abraham/react-robot' },
@@ -24964,13 +24971,6 @@ var Links = function Links() {
         { href: 'http://jam-icons.com/' },
         'Thank you Jam Icons'
       )
-    ),
-    _react2.default.createElement(
-      'p',
-      null,
-      'Commands you can use:',
-      _react2.default.createElement('br', null),
-      'left, right, move, place, report, shutdown'
     )
   );
 };

@@ -11,13 +11,13 @@ import Links from './Links'
 const App = () => {
   return (
     <div className={ styles.container } >
-      <Links />
       <Input />
       <Message />
       <div className={ styles.boardContainer }>
         <Board />
         <Robot />
       </div>
+      <Links />
     </div>
   )
 }

@@ -29,6 +29,8 @@
   padding: 8px;
   box-sizing: border-box;
   outline: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .wrapper {
