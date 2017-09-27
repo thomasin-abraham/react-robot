@@ -24989,8 +24989,7 @@ var _utils = __webpack_require__(249);
 function placeRobot(state, action) {
   var xP = (0, _utils.keepOnBoard)(4, 0, action.x);
   var yP = (0, _utils.keepOnBoard)(4, 0, action.y);
-  var isValid = xP[1] && yP[1];
-  return isValid ? {
+  return xP[1] && yP[1] ? {
     active: true,
     x: xP[0] || 0,
     y: yP[0] || 0,

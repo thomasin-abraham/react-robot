@@ -3,8 +3,7 @@ import { keepOnBoard, radiansToDirection, setMessage } from './utils'
 export function placeRobot (state, action) {
   const xP = keepOnBoard ( 4, 0, action.x )
   const yP = keepOnBoard ( 4, 0, action.y )
-  const isValid = xP[1] && yP[1]
-  return isValid
+  return xP[1] && yP[1]
     ? {
         active: true,
         x: xP[0] || 0,
