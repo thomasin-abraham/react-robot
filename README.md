@@ -1,2 +1,1 @@
-# basic-boilerplate
-Serverless, Yarn, Webpack, Babel, Ava
+Yarn, Webpack, Babel, Ava, CSS Modules
