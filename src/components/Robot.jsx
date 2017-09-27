@@ -16,9 +16,9 @@ const Robot = ({ x, y, radians }) => {
 
 function mapStateToProps (state) {
   return {
-    x: state.position.x,
-    y: state.position.y,
-    radians: state.position.radians
+    x: state.x,
+    y: state.y,
+    radians: state.radians
   }
 }
 
